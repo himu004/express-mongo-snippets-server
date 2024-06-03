@@ -3,6 +3,9 @@ const cors = require("cors");
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const app = express();
 const port = process.env.PORT || 5000;
+//! Connecting HTML
+const path = require("path");
+let publicPath = path.join(__dirname, "public");
 
 // *********************************  MONGODB ************************************************ \\
 
@@ -84,9 +87,11 @@ const users = [
 ];
 
 app.get("/", (req, res) => {
-  res.send(
-    "Hello Ayaaz, your user mnagement server is running at http://localhost"
-  );
+  res.sendFile(`${publicPath}/index.html`);
+});
+
+app.get("/home", (req, res) => {
+  res.sendFile(`${publicPath}/home.html`);
 });
 
 app.get("/users", (req, res) => {
